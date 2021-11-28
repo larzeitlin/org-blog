@@ -4,13 +4,13 @@
             [clj-org.org :as org-clj]
             [clojure.string :as str]))
 
-(defmacro slurp [file]
-  (clojure.core/slurp file))
-
-
-(defmacro ls [dir]
-  (->> dir io/file file-seq (mapv str)))
-
+(defn filename->blog-post [filename]
+  (let [id (-> filename hash str)
+        post (-> filename
+                 clojure.core/slurp
+                 org-clj/parse-org)]
+    [id (merge post {:id       id
+                     :filename filename})]))
 
 (defmacro slurp-posts []
   (->> "./posts"
@@ -18,8 +18,5 @@
        file-seq
        (mapv str)
        (filter #(str/ends-with? % ".org"))
-       (mapv #(-> %
-                  clojure.core/slurp
-                  org-clj/parse-org
-                  (merge {:id (-> % hash str)
-                          :filename %})))))
+       (mapv filename->blog-post)
+       (into {})))

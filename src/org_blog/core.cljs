@@ -2,7 +2,6 @@
   (:require
    [reagent.core :as reagent :refer [atom]]
    [reagent.dom :as rdom]
-   [shadow.resource :as r]
    [reagent.session :as session]
    [org-blog.posts :as p]
    [reitit.frontend :as reitit]
@@ -10,11 +9,6 @@
 
 ;; -------------------------
 ;; Routes
-
-(def id->post
-  (->> (p/posts)
-       (mapv (fn [{:keys [id] :as post}] [id post]))
-       (into {})))
 
 
 (def router
@@ -37,29 +31,11 @@
   (fn []
     [:span.main
      [:h1 "Welcome to my blog"]
-     [:p (str (get id->post -1157620694))]
      [:ul
-      [:li [:a {:href (path-for :posts)} "Blog posts"]]
-      [:li [:a {:href "/broken/link"} "Broken link"]]]]))
+      [:li [:a {:href (path-for :posts)} "Blog posts"]]]]))
 
 
-
-(defn posts-page []
-  (fn []
-    [:span.main
-     [:h1 "The posts"]
-     [:ul (map (fn [{:keys [title id]}]
-                 [:li {:name (str "post-" title) :key (str "post-" title)}
-                  [:a {:href (path-for :post {:post-id id})} "Post: " title]])
-               (p/posts))]]))
-
-
-(defn posts []
-  (fn []
-    (let [routing-data (session/get :route)
-          post-id (get-in routing-data [:route-params :post-id])]
-      (->> post-id (get id->post) :content))))
-
+(def posts-page (partial p/posts-page path-for))
 
 (defn about-page []
   (fn [] [:span.main
@@ -76,7 +52,7 @@
     :index #'home-page
     :about #'about-page
     :posts #'posts-page
-    :post #'posts))
+    :post #'p/post-page))
 
 
 ;; -------------------------
