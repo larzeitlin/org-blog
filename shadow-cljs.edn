@@ -9,7 +9,7 @@
  :builds       {:app {:target     :browser
                       :output-dir "public/js"
                       :asset-path "/js"
-                      :build-options {:cache-level :jars}
+                      :build-options {:cache-level :off}
                       :modules    {:app {:entries [org-blog.core]}}
                       :devtools   {:after-load org-blog.core/mount-root}}}
 

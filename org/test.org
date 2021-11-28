@@ -1,5 +1,0 @@
-* Header
-this is some content
-
-** this is a subheader
-this is some more writing

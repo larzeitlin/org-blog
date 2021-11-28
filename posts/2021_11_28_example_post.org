@@ -1,0 +1,20 @@
+#+TITLE:  How to add a blog post
+#+AUTHOR: Luke Zeitlin
+#+DATE:   2021-11-28
+
+* Org format
+Orgblogcljs posts are written in *org* format, a format designed to be edited in Emacs *org mode*.
+
+** examples of synax
+Here is some /words in italic/, we can also *make some words bold*.
+
+Here's an image:
+[[https://clojurescript.org/images/cljs-logo-60b.png]]
+
+** TODO
+   - [ ] Fix things like this ugly checklist!
+   - [ ] Support code blocks.
+   - [ ] Support arbitrary hiccup (ooh, cool!).
+   - [ ] Switch from org-clj to org-parser.
+   - [ ] Hot-reloading when org file is edited.
+

@@ -1,6 +1,5 @@
 (ns org-blog.core
   (:require
-   [reagent.core :as reagent :refer [atom]]
    [reagent.dom :as rdom]
    [reagent.session :as session]
    [org-blog.posts :as p]
@@ -30,7 +29,7 @@
 (defn home-page []
   (fn []
     [:span.main
-     [:h1 "Welcome to my blog"]
+     [:h1 "Welcome to orgblogcljs"]
      [:ul
       [:li [:a {:href (path-for :posts)} "Blog posts"]]]]))
 
@@ -40,8 +39,10 @@
 (defn about-page []
   (fn [] [:span.main
           [:p
-           [:h1 "About"]
-           [:p "hello"]]]))
+           [:h1 "About orgblogcljs"]
+           [:p [:b "Orgblogcljs" ] " is a minimalist static site blog that can be hosted on services like GitHub Pages.
+                   It's made with Clojurescript and Reagent.
+                   Posts are writting in emacs " [:b ".org"] " format."]]]))
 
 
 ;; -------------------------
@@ -67,7 +68,7 @@
          [:a {:href (path-for :about)} "About"]]]
        [page]
        [:footer
-        [:p "This is a footer"]]])))
+        [:p "This blog is made with " [:a {:href "https://github.com/larzeitlin/orgblogcljs"} "orgblogcljs."]]]])))
 
 ;; -------------------------
 ;; Initialize app

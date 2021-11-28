@@ -1,10 +1,11 @@
 (ns org-blog.posts
-  (:require  [shadow.resource :as r]
-             [macros.files :as macf]
-             [reagent.session :as session]
-             [clojure.string :as str]
-             [reitit.frontend :as reitit]))
+  (:require  [macros.files :as macf]
+             [reagent.session :as session]))
 
+;; TODO:
+;; - org-clj is not parsing headers properly, fix this
+;; - test out images, links
+;; - support arbitrary hiccup within org post (oooh, nice)
 
 (def id->posts (macf/slurp-posts))
 
