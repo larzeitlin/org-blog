@@ -1,8 +1,12 @@
-#+TITLE:  Example Org File
+#+TITLE:  THis new post
 #+AUTHOR: Luke Zeitlin
 #+DATE:   2021-11-28
 
 * Header1
+
+s
+
+sdfsd
 this is some content
 
 ** this is a subheader
