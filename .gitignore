@@ -2,6 +2,7 @@
 /classes
 /checkouts
 profiles.clj
+package-lock.json
 node_modules
 pom.xml
 pom.xml.asc
