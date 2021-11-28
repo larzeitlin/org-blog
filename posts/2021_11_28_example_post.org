@@ -1,4 +1,4 @@
-#+TITLE:  How to add a blog post
+#+TITLE:  An example blog post 
 #+AUTHOR: Luke Zeitlin
 #+DATE:   2021-11-28
 

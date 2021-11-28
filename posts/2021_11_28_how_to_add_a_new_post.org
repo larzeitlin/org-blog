@@ -1,0 +1,37 @@
+#+TITLE:  How to add a blog post
+#+AUTHOR: Luke Zeitlin
+#+DATE:   2021-11-28
+
+* How to add a new blog post
+
+** Create a new org file
+Create a new org file in the posts directory, for example:
+
+=cd posts=
+
+=touch my_new_blog_post.org=
+
+** See the org mode docs for syntax
+
+[[https://orgmode.org][Org Mode Docs]]
+
+
+*** Add headers
+Ensure at least the =#+TITLE= header is included.
+This is used to name the post.
+Look at [[https://raw.githubusercontent.com/larzeitlin/orgblogcljs/main/posts/2021_11_28_how_to_add_a_new_post.org][this .org file]] for this post to see example headers.
+
+** Compile
+Org files are ingested by a CLJ macro at compile time. To force compilation run:
+
+=npx shadow-cljs compile app=
+
+** Run locally
+To run the blog locally use:
+
+=npx shadow-cljs watch app=
+
+** Release it
+Once you are happy, run this before pushing it to whever you are hosting it:
+
+=npx shadow-cljs release app=
