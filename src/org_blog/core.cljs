@@ -53,7 +53,8 @@
     :index #'home-page
     :about #'about-page
     :posts #'posts-page
-    :post #'p/post-page))
+    :post #'p/post-page
+    #'home-page))
 
 
 ;; -------------------------
@@ -76,7 +77,7 @@
 (defn mount-root []
   (rdom/render [current-page] (.getElementById js/document "app")))
 
-(defn init! []
+(defn ^:export init! []
   (accountant/configure-navigation!
    {:nav-handler
     (fn [path]
