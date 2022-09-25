@@ -1,14 +1,10 @@
-(ns org-blog.core
+(ns ^:dev/always org-blog.core
   (:require
    [reagent.dom :as rdom]
    [reagent.session :as session]
    [org-blog.posts :as p]
    [reitit.frontend :as reitit]
    [accountant.core :as accountant]))
-
-;; -------------------------
-;; Routes
-
 
 (def router
   (reitit/router
@@ -23,16 +19,12 @@
     (:path (reitit/match-by-name router route params))
     (:path (reitit/match-by-name router route))))
 
-;; -------------------------
-;; Page components
-
 (defn home-page []
   (fn []
     [:span.main
      [:h1 "Welcome to orgblogcljs"]
      [:ul
-      [:li [:a {:href (path-for :posts)} "Blog posts"]]]]))
-
+    [:li [:a {:href (path-for :posts)} "Blog posts"]]]]))
 
 (def posts-page (partial p/posts-page path-for))
 
@@ -44,10 +36,6 @@
                    It's made with Clojurescript and Reagent.
                    Posts are writting in emacs " [:b ".org"] " format."]]]))
 
-
-;; -------------------------
-;; Translate routes -> page components
-
 (defn page-for [route]
   (case route
     :index #'home-page
@@ -55,10 +43,6 @@
     :posts #'posts-page
     :post #'p/post-page
     #'home-page))
-
-
-;; -------------------------
-;; Page mounting component
 
 (defn current-page []
   (fn []
@@ -70,9 +54,6 @@
        [page]
        [:footer
         [:p "This blog is made with " [:a {:href "https://github.com/larzeitlin/orgblogcljs"} "orgblogcljs."]]]])))
-
-;; -------------------------
-;; Initialize app
 
 (defn mount-root []
   (rdom/render [current-page] (.getElementById js/document "app")))

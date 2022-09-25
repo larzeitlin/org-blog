@@ -1,22 +1,16 @@
-(ns macros.files
-  (:refer-clojure :exclude [slurp])
+(ns ^:dev/always macros.files
   (:require [clojure.java.io :as io]
-            [clj-org.org :as org-clj]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [cljs.env :as env]
+            [shadow.resource :as sr]))
 
-(defn filename->blog-post [filename]
-  (let [id (-> filename hash str)
-        post (-> filename
-                 clojure.core/slurp
-                 org-clj/parse-org)]
-    [id (merge post {:id       id
-                     :filename filename})]))
-
-(defmacro slurp-posts []
-  (->> "./posts"
+(defmacro posts []
+  (->> "./resources/posts"
        io/file
        file-seq
        (mapv str)
-       (filter #(str/ends-with? % ".org"))
-       (mapv filename->blog-post)
+       (filterv #(str/ends-with? % ".org"))
+       (mapv (fn [filename]
+               [filename
+                (-> filename (str/split #"\./resources/") second ((partial sr/slurp-resource &env)))]))
        (into {})))
